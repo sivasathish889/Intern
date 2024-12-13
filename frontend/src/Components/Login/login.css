@@ -1,0 +1,18 @@
+.login_body{
+    height: 100vh;
+    background: url('../../assets/image.jpg') no-repeat;
+    background-size: cover;
+}
+.login_sec_head{
+    font-size: .7em;
+    position: relative;
+    bottom: 15px;
+    left: 65px;
+}
+.login_username input, .login_password input { 
+    border: 1px solid rgb(172, 164, 164);
+    padding-left: 15px;
+}
+.login_username input::selection, .login_password input::selection{
+    background-color: rgb(213, 103, 103);
+}

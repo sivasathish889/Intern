@@ -1,0 +1,91 @@
+body{
+    font-size: small;
+}
+.home_body{
+    height: 100vh;
+    background: url('../../assets/image.jpg') no-repeat;
+    background-size: cover;
+}
+.home_sec_head{
+    font-size: .7em;
+    position: relative;
+    bottom: 15px;
+    left: 8em;
+}
+.home_head{
+    height: 85vh !important;    
+}
+.home_username input, .home_password input { 
+    border: 1px solid rgb(172, 164, 164);
+    padding-left: 15px;
+}
+.home_username input::selection, .home_password input::selection{
+    background-color: rgb(213, 103, 103);
+}
+
+.home_processing ul{
+    font-size: .6em;
+    gap: 15px;
+    position: relative;
+    left: -16px;
+}
+
+.home_processing ul li{
+    list-style: none;
+}
+
+.home_inp1 input {
+    border: 1px solid rgb(0, 0, 0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+    width: 18em;
+}
+
+.home_inp2 select {
+    border: 1px solid rgb(0, 0, 0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+    width: 18em;
+}
+
+.botton_input_field textarea {
+    border: 1px solid rgb(0, 0, 0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+#nav_listItem{
+    position: relative;
+    right: 3em;
+    font-size: small;
+    cursor: pointer;
+    padding: 3px;
+    padding-right: 4em;
+    padding-left: 2em;
+}
+#nav_listItem{
+    list-style-type: none;
+}
+.nav_li_active{
+    background: red;
+    position: absolute;
+    right: 3em !important;
+    display: list-item;
+    padding: 6px;
+    padding-right: 5em;    
+    transform: translate(20px);
+    color: white;
+    transition: .5s;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.dot_active{
+    position: relative;
+    left: 11.5em;
+}
+
+.ticket_name{
+    border: none;
+    pointer-events: none;
+}
