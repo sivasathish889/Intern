@@ -16,8 +16,10 @@ const Login = () => {
     }
     await axios.post(`${baseURL}${loginURLS.suburl}`, payLoad, {withCredentials : true})
     .then((data)=>{
-      toast.success(data?.data?.message)
-      navigate('/')
+      if(data?.data?.success){
+        toast.success(data?.data?.message)
+        navigate('/')
+      }
     })
     .catch((err)=>{
       toast.error(err?.response?.data?.message)

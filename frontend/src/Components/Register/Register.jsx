@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './register.css'
 import {Link,useNavigate} from  'react-router-dom'
 import axios from 'axios'
 import { baseURL, registerURLS } from '../../URLS'
 import {toast} from "react-toastify"
+import { startRegistration } from "@simplewebauthn/browser"
 
 
 const Register = () => {
   const navigate = useNavigate()
-  const sendFrom = (e)=>{
+  const sendFrom = async(e)=>{
     e.preventDefault()
     const payload = {
       "username" : e.target[0].value,
@@ -17,15 +18,37 @@ const Register = () => {
       "c_password" : e.target[3].value
     }
     try {
-      axios.post(`${baseURL}${registerURLS.suburl}`,payload, {withCredentials : true})
-      .then((data)=>{
-        toast.success(data?.data?.message)
-        navigate('/login')
-      })
-      .catch((err)=>{
-        toast.error(err?.response?.data?.message)
-      })
-    } catch (error) {
+      await axios.post(`${baseURL}/init-register`, payload, { withCredentials: true })
+        .then(async (data) => {
+          let registerJson = await startRegistration({
+            optionsJSON: data.data
+          })
+          await axios.post(`${baseURL}/verify-register`, { "registerJson": registerJson }, { withCredentials: true, headers: { "Content-Type": "application/json" } })
+            .then((data) =>{ 
+              
+              toast.success(data?.data?.message) 
+            })
+            .catch((err) => { 
+              toast.error(err?.response?.data?.message) 
+            })
+        })
+        .catch((err) => {
+          toast.error(err?.response?.data?.message)
+  
+        })
+
+        axios.post(`${baseURL}${registerURLS.suburl}`, payload, { withCredentials: true })
+        .then((data) => {
+          if(data?.data?.success){
+            navigate('/login')
+            toast.success(data?.data?.message)
+          }
+        })
+        .catch((err) => {
+          toast.error(err?.response?.data?.message)
+        })
+
+    }  catch (error) {
       console.log(error.message)
     }
   }

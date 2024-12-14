@@ -15,7 +15,7 @@ dotenv.config({path: "./.env"})
 
 // CORS
 const corsOptions ={
-    origin:'http://localhost:5173', 
+    origin:'http://localhost:5174', 
     credentials:true,         
     optionSuccessStatus:200
 }
@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 db
 
 // middleware
-app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
