@@ -27,25 +27,16 @@ const Register = () => {
             .then((data) =>{ 
               
               toast.success(data?.data?.message) 
+              navigate("/login")
             })
             .catch((err) => { 
               toast.error(err?.response?.data?.message) 
             })
-        })
-        .catch((err) => {
-          toast.error(err?.response?.data?.message)
-  
-        })
 
-        axios.post(`${baseURL}${registerURLS.suburl}`, payload, { withCredentials: true })
-        .then((data) => {
-          if(data?.data?.success){
-            navigate('/login')
-            toast.success(data?.data?.message)
-          }
         })
         .catch((err) => {
-          toast.error(err?.response?.data?.message)
+          toast.error(err.response.data.messsage )
+  
         })
 
     }  catch (error) {

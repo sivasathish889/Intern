@@ -1,5 +1,5 @@
 const { generateRegistrationOptions } = require("@simplewebauthn/server")
-const db = require("../db");
+const db = require("../../db");
 
 
 require("dotenv").config()

@@ -4,6 +4,7 @@ import {Link, useNavigate} from  'react-router-dom'
 import axios from "axios"
 import {baseURL, loginURLS} from "../../URLS"
 import { toast } from 'react-toastify'
+import {startAuthentication } from "@simplewebauthn/browser"
 
 const Login = () => {
   let navigate = useNavigate()
@@ -14,21 +15,30 @@ const Login = () => {
       "username" : e.target[0].value,
       "password" : e.target[1].value
     }
-    await axios.post(`${baseURL}${loginURLS.suburl}`, payLoad, {withCredentials : true})
-    .then((data)=>{
-      if(data?.data?.success){
-        toast.success(data?.data?.message)
-        navigate('/')
+    try {
+    await axios.post(`${baseURL}/init-login`, payLoad, { withCredentials: true })
+    .then(async (data) => {
+      let LoginJson = await startAuthentication({
+        optionsJSON : data.data,
+      })
+      console.log(LoginJson)
+      
+      await axios.post(`${baseURL}/verify-login`, { "LoginJson": LoginJson }, { withCredentials: true, headers: { "Content-Type": "application/json" } })
+      .then((data) =>{ 
+        console.log(data)
+      })
+      .catch((err) => { 
+        toast.error(err?.response?.data?.message) 
+      })
+
+    })
+      .catch((err) => {
+          console.log(err)
+              })
       }
-    })
-    .catch((err)=>{
-      toast.error(err?.response?.data?.message)
-    })
-    .catch((err)=>{
-    if(err){
+    catch(err){
       console.log(err)
     }
-  })
 
   }
 

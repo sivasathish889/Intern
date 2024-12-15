@@ -1,6 +1,6 @@
 const {verifyRegistrationResponse} = require("@simplewebauthn/server")
-const {hashPass} = require("../middleware/bcrypt.controller")
-const db = require("../db");
+const {hashPass} = require("../../middleware/bcrypt.controller")
+const db = require("../../db");
 
 require("dotenv").config()
 
@@ -23,7 +23,6 @@ const Verify_RegisterController = (req,res)=>{
 
     verification.then((data)=>{
     if(data.verified){
-      console.log(data)
         // password hashing
         let hashPassword = hashPass(password);
         // user created
