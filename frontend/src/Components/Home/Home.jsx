@@ -20,14 +20,12 @@ const Home = () => {
   async function fetchData() {
     await axios.get(`${baseURL}${HomeURLS.suburl}`, { withCredentials: true, })
     .then((data) => {
-      console.log(data)
       setDevName(data.data.dev_data)
       setTicketData(data.data.ticket_data)
       setUserName(data.data.user.name)
       setCount(data.data.ticket_data.length + 1)
     })
     .catch((err) => {
-      console.log(err)
       if (!err.response.data.success) {
         navigate("/login")
       }

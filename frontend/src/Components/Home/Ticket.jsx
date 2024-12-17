@@ -9,7 +9,6 @@ const Ticket = (props) => {
   const {setCount, count, userName, devName ,setButtonSubmit, buttonSubmit} = props
   const [IssueName, setIssueName] = useState('')
   const [getIssueName, setGetIssueName] = useState(false)
-  console.log(IssueName)
 
   const increament =()=>{
     setCount((preCount)=>preCount + 1)
