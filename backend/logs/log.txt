@@ -26271,3 +26271,6 @@
 12/17/2024 -- 11:55:3 --  POST -- /verify-register  200 
 12/17/2024 -- 11:55:13 --  GET -- /init-login?username=shivas&password=mnb  200 
 12/17/2024 -- 11:55:30 --  POST -- /verify-login  200 
+12/17/2024 -- 12:3:47 --  GET -- /init-login?username=shivas&password=mnb  200 
+12/17/2024 -- 12:6:59 --  GET -- /init-login?username=shivas&password=mnb  200 
+12/17/2024 -- 12:7:15 --  POST -- /verify-login  200 

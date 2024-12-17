@@ -29,6 +29,10 @@ Clone the project
   git clone https://github.com/sivasathish889/Intern.git
 ```
 
+Databse setup :
+
+ -Create a database name = intern_project
+
 Go to the frontend project directory
 
 ```bash
