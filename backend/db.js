@@ -19,7 +19,7 @@ db.connect((err)=>{
 })
 
 // table creation
-db.query('CREATE TABLE IF NOT EXISTS admin (id int primary key auto_increment, name varchar(100),email varchar(100), password varchar(100),creditional_id varchar(100), public_Key blob, counter int, deviceType varchar(100), backup bool, transport varchar(100) );')
+db.query('CREATE TABLE IF NOT EXISTS admin (id int primary key auto_increment, name varchar(100),email varchar(100), password varchar(100),creditional_id varchar(100), public_Key varchar(1000), counter int, deviceType varchar(100), backup bool, transport varchar(100) );')
 db.query('CREATE TABLE IF NOT EXISTS developers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100), password VARCHAR(100) )')
 db.query(
     'CREATE TABLE IF NOT EXISTS JIRA_ticket ( id INT AUTO_INCREMENT PRIMARY KEY, ticket_name VARCHAR(100), jira_id int unique, iris_id int unique, description VARCHAR(200), status int default 0, created_at date,developer_id int,foreign key(developer_id) references developers(id));'

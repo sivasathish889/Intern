@@ -21,11 +21,10 @@ const Register = () => {
       await axios.post(`${baseURL}/init-register`, payload, { withCredentials: true })
         .then(async (data) => {
           let registerJson = await startRegistration({
-            optionsJSON: data.data
+            optionsJSON : data.data
           })
           await axios.post(`${baseURL}/verify-register`, { "registerJson": registerJson }, { withCredentials: true, headers: { "Content-Type": "application/json" } })
             .then((data) =>{ 
-              
               toast.success(data?.data?.message) 
               navigate("/login")
             })

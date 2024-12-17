@@ -13,16 +13,15 @@ const Verify_RegisterController = (req,res)=>{
     const { username, email, password } = JSON.parse(req.cookies.user)
 
     const {registerJson} = (req.body)
-
     const verification = verifyRegistrationResponse({
-        response : registerJson,
-        expectedChallenge : regId.challenge,
-        expectedOrigin : process.env.CLIENT_URL,
-        expectedRPID : RP_ID
+      response : registerJson,
+      expectedChallenge : regId.challenge,
+      expectedOrigin : process.env.CLIENT_URL,
+      expectedRPID : RP_ID
     })
-
     verification.then((data)=>{
-    if(data.verified){
+      if(data.verified){
+        let BufferPubliKey = Buffer.from(data.registrationInfo.credential.publicKey).toString('base64')
         // password hashing
         let hashPassword = hashPass(password);
         // user created
@@ -32,7 +31,7 @@ const Verify_RegisterController = (req,res)=>{
             email, 
             hashPassword, 
             data.registrationInfo.credential.id, 
-            data.registrationInfo.credential.publicKey, 
+            BufferPubliKey, 
             data.registrationInfo.credential.counter, 
             data.registrationInfo.credentialDeviceType, 
             data.registrationInfo.credentialBackedUp,

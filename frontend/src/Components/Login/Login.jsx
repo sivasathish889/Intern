@@ -7,7 +7,10 @@ import { toast } from 'react-toastify'
 import {startAuthentication } from "@simplewebauthn/browser"
 
 const Login = () => {
+    const SERVER_URL = "http://localhost:8000"
+
   let navigate = useNavigate()
+  let LoginJson;
   
   let sendForm =async (e) =>{
     e.preventDefault()
@@ -16,25 +19,24 @@ const Login = () => {
       "password" : e.target[1].value
     }
     try {
-    await axios.post(`${baseURL}/init-login`, payLoad, { withCredentials: true })
-    .then(async (data) => {
-      let LoginJson = await startAuthentication({
-        optionsJSON : data.data,
-      })
-      console.log(LoginJson)
-      
-      await axios.post(`${baseURL}/verify-login`, { "LoginJson": LoginJson }, { withCredentials: true, headers: { "Content-Type": "application/json" } })
-      .then((data) =>{ 
-        console.log(data)
-      })
-      .catch((err) => { 
-        toast.error(err?.response?.data?.message) 
-      })
-
+              
+    const initResponse = await fetch(`${SERVER_URL}/init-login?username=${payLoad.username}&password=${payLoad.password}`, {
+      credentials: "include",
     })
-      .catch((err) => {
-          console.log(err)
-              })
+    const options = await initResponse.json()
+    if (!initResponse.ok) {
+      console.log(options.error)
+    }
+  
+    // 2. Get passkey
+    const authJSON = await startAuthentication({
+       optionsJSON : options
+    })
+
+    await axios.post(`${SERVER_URL}/verify-login`,authJSON,{withCredentials : true, headers : { "Content-Type": "application/json"}})
+    .then((data)=>console.log(data))
+    .catch((err)=>console.log(err))
+
       }
     catch(err){
       console.log(err)
