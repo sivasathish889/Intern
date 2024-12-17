@@ -13,7 +13,7 @@ const HomeController = async (req, res) => {
       }
       else{
         let verify = jwt.verify(cookie_token,process.env.JWT_STRING)
-        db.query('select * from admin where name = ? AND password = ?', [verify.username, verify.dbPass],(err,result)=>{
+        db.query('select * from admin where name = ? ', [verify.username ],(err,result)=>{
           if(err) throw err
           if(result.length < 0){
             return res

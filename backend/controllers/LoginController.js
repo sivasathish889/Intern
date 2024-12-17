@@ -9,8 +9,8 @@ const LoginController = (req, res) => {
       db.query('select * from admin where name = ?', [username],(err,result)=>{
 
         let dbToJson =JSON.parse(JSON.stringify(result))
-            let dbPass = dbToJson[0].password
-            let hashingPass = comparePass(password, dbPass)
+            let db_data = dbToJson[0].password
+            let hashingPass = comparePass(password, db_data)
             
             if(!hashingPass){
               return res
@@ -19,7 +19,7 @@ const LoginController = (req, res) => {
             }
             else{
               // jwt token creation
-              let payload = {username, dbPass}
+              let payload = {username, db_data}
               const token = jwt.sign(payload, process.env.JWT_STRING)
               
               let cookieOptions = { 

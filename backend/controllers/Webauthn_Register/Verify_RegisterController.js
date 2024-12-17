@@ -45,6 +45,8 @@ const Verify_RegisterController = (req,res)=>{
               .status(500)
               .json({ message: err.message, success: false });
             } else {
+              res.clearCookie("RegId")
+              res.clearCookie("user")
               return res
                       .status(201)
                       .json({ message: "admin created", success: true});
