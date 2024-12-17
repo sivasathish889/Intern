@@ -5,6 +5,7 @@ import './home.css'
 import NaveBar from './NaveBar'
 import Ticket from './Ticket'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 
 
@@ -28,6 +29,9 @@ const Home = () => {
     .catch((err) => {
       if (!err.response.data.success) {
         navigate("/login")
+      }
+      else{
+        toast.error(err.response.data.message)
       }
     })
   }

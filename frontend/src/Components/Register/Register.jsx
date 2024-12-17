@@ -34,12 +34,12 @@ const Register = () => {
 
         })
         .catch((err) => {
-          toast.error(err.response.data.messsage )
+          toast.error(err?.response?.data?.message )
   
         })
 
     }  catch (error) {
-      toast.error(err.response.data.messsage )
+      toast.error(err.response.data.message )
     }
   }
 

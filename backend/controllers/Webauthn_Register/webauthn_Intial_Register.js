@@ -17,7 +17,7 @@ const webauthn_intial_register = async (req,res)=>{
      db.query('select * from admin where name = ?',[username],async (err,result)=>{
         if(err) throw err
         if(result.length > 0){
-            return res.status(400).json({"messsage" : "username is Already exists"})
+            return res.status(400).json({"message" : "username is Already exists", "success" : false})
         }
         else{
             const options = await generateRegistrationOptions({
@@ -44,7 +44,7 @@ const webauthn_intial_register = async (req,res)=>{
 } else {
     return res
       .status(500)
-      .json({ message: "Password Does Not Match", success: false });
+      .json({ "message": "Password Does Not Match", success: false });
   }
 
    } catch (error) {
